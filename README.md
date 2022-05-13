@@ -25,6 +25,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 /jsconfig.json
 
+## Api secret keys (NextJS)
+
+/.env.local
+
+## Maps
+
+https://www.mapbox.com/
+Geoapify
+
 ## Getting Started
 
 First, run the development server:
