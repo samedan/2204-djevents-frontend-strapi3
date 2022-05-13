@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import "mapbox-gl/dist/mapbox-gl.css";
-import Geocode from "react-geocode";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import styles from "@/styles/EventMap.module.css";
 
@@ -14,15 +12,25 @@ export default function EventMap({ evt }) {
   const [lng, setLng] = useState(-73.935242);
   const [zoom, setZoom] = useState(9);
 
-  Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY);
-
   useEffect(() => {
-    Geocode.fromAddress(evt.address).then((res) => {
-      const { lat, lng } = res.results[0].geometry.location;
-      console.log(lat, lng);
-      setLat(lat);
-      setLng(lng);
-    });
+    const geopifyAddress = async (evt) => {
+      var requestOptions = {
+        method: "GET",
+      };
+      await fetch(
+        `https://api.geoapify.com/v1/geocode/search?text=${evt.address}&apiKey=${process.env.NEXT_PUBLIC_GEOAPIFY_API_KEY}`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result.features[0].bbox[0]);
+          setLng(result.features[0].bbox[0]);
+          setLat(result.features[0].bbox[1]);
+        })
+        .catch((error) => console.log("error", error));
+    };
+    geopifyAddress(evt);
+
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/streets-v11",
