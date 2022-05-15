@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
       router.push("/account/dashboard");
     } else {
       setError(data.message);
-      setError(null);
+      setError(data.message);
     }
   };
 
@@ -54,8 +54,9 @@ export const AuthProvider = ({ children }) => {
       setUser(data.user);
       router.push("/account/dashboard");
     } else {
+      console.log(data);
       setError(data.message);
-      setError(null);
+      setError(data.message);
     }
   };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { FaUser } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import styles from "@/styles/AuthForm.module.css";
@@ -39,7 +39,7 @@ export default function LoginPage() {
         <h1>
           <FaUser /> Log in
         </h1>
-        {error && <p className={styles.error}>{error}</p>}
+        {error && <p className={styles.error}>{error.message}</p>}
         <ToastContainer />
         <form onSubmit={handleSubmit}>
           <div>

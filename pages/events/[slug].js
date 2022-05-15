@@ -1,5 +1,5 @@
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { FaPencilAlt, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
@@ -22,11 +22,19 @@ export default function EventPage({ evt }) {
         <ToastContainer />
         {evt.image && (
           <div className={styles.image}>
-            <Image
-              src={evt.image.formats.medium.url}
-              width={960}
-              height={600}
-            />
+            {evt.image.formats.medium ? (
+              <Image
+                src={evt.image.formats.medium.url}
+                width={960}
+                height={600}
+              />
+            ) : (
+              <Image
+                src={evt.image.formats.small.url}
+                width={960}
+                height={600}
+              />
+            )}
           </div>
         )}
 

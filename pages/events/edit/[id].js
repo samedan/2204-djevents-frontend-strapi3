@@ -1,7 +1,7 @@
 import moment from "moment";
 import { FaImage } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { parseCookies } from "@/helpers/index";
 import { useState } from "react";
 import { useRouter } from "next/router";

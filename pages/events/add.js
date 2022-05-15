@@ -1,6 +1,6 @@
 import { parseCookies } from "@/helpers/index";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -41,6 +41,8 @@ export default function AddEventPage({ token }) {
       },
       body: JSON.stringify(values),
     });
+
+    console.log(res);
 
     if (!res.ok) {
       if (res.status === 403 || res.status === 401) {
