@@ -23,9 +23,18 @@ export default function EventMap({ evt }) {
       )
         .then((response) => response.json())
         .then((result) => {
-          console.log(result.features[0].bbox[0]);
-          setLng(result.features[0].bbox[0]);
-          setLat(result.features[0].bbox[1]);
+          console.log(result);
+          let i = 0;
+          const arrayLength = result.features;
+          // count the MapBox max nr of results with actual Map coordinates
+          const count = arrayLength.filter((item) => item.bbox !== undefined);
+          console.log(count);
+          if (count.length > 0) {
+            // choose first result with actual Map coordinates
+            console.log("found address");
+            setLng(count[0].bbox[0]);
+            setLat(count[0].bbox[1]);
+          }
         })
         .catch((error) => console.log("error", error));
     };

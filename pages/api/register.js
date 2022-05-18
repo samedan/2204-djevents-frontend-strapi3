@@ -19,6 +19,8 @@ export default async (req, res) => {
 
     const data = await strapiRes.json();
 
+    console.log("register response on frontend");
+    console.log(data);
     if (strapiRes.ok) {
       // Set Cookie
       res.setHeader(

@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }) => {
       router.push("/account/dashboard");
     } else {
       setError(data.message);
-      setError(data.message);
     }
   };
 
@@ -49,13 +48,14 @@ export const AuthProvider = ({ children }) => {
     });
 
     const data = await res.json();
+    console.log("data response on AuthContext");
+    console.log(data);
 
     if (res.ok) {
       setUser(data.user);
       router.push("/account/dashboard");
     } else {
       console.log(data);
-      setError(data.message);
       setError(data.message);
     }
   };
@@ -73,9 +73,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Check if user is logged in
-  const checkUserLoggedIn = async (user) => {
+  const checkUserLoggedIn = async () => {
+    console.log("checkUserLoggedIn on AuthContext");
     const res = await fetch(`${NEXT_URL}/api/user`);
     const data = await res.json();
+    console.log("data", data);
 
     if (res.ok) {
       setUser(data.user);

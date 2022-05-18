@@ -23,6 +23,10 @@
   justify-content: center;
   list-style: none;
 }
+.welcome {
+  font-size: 10px;
+  color: blue;
+}
 
 .logo {
   color: red;

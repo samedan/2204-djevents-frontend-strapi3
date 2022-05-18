@@ -1,11 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  images: { domains: ["res.cloudinary.com"] },
-  publicRuntimeConfig: process.env.API_URL || "http://localhost:1337",
-};
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   reactStrictMode: true,
+//   images: { domains: ["res.cloudinary.com"] },
+//   publicRuntimeConfig: process.env.API_URL || "http://localhost:1337",
+// };
 
-module.exports = nextConfig;
+// module.exports = nextConfig;
 
 // module.exports = {
 //   serverRuntimeConfig: {
@@ -15,3 +15,9 @@ module.exports = nextConfig;
 //     apiUrl: process.env.CLIENT_API_URL, // http://localhost:1337
 //   },
 // };
+// Git original strapi 3
+module.exports = {
+  images: {
+    domains: ["res.cloudinary.com"],
+  },
+};

@@ -17,6 +17,8 @@ export default async (req, res) => {
     });
 
     const data = await strapiRes.json();
+    console.log("login response on frontend");
+    console.log(data);
 
     if (strapiRes.ok) {
       // Set Cookie

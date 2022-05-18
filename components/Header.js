@@ -7,7 +7,7 @@ import AuthContext from "@/context/AuthContext";
 
 export default function Header() {
   const { user, logout } = useContext(AuthContext);
-
+  console.log(user);
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -37,6 +37,9 @@ export default function Header() {
                 </Link>
               </li>
               <li>
+                <p className={styles.welcome}>
+                  Welcome, <i>{user.email}</i>
+                </p>
                 <button onClick={logout} className="btn-secondary btn-icon">
                   <FaSignOutAlt /> Logout
                 </button>

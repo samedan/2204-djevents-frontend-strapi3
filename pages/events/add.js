@@ -1,6 +1,5 @@
 import { parseCookies } from "@/helpers/index";
 import { ToastContainer, toast } from "react-toastify";
-
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -33,6 +32,7 @@ export default function AddEventPage({ token }) {
       toast.error("Please fill in all fields");
     }
 
+    console.log("hasEmptyFields", hasEmptyFields);
     const res = await fetch(`${API_URL}/events`, {
       method: "POST",
       headers: {
@@ -43,7 +43,8 @@ export default function AddEventPage({ token }) {
     });
 
     console.log(res);
-
+    const evt = await res.json();
+    console.log(evt);
     if (!res.ok) {
       if (res.status === 403 || res.status === 401) {
         toast.error("No token included, please log in.");
@@ -51,7 +52,8 @@ export default function AddEventPage({ token }) {
       }
       toast.error("Something Went Wrong");
     } else {
-      const evt = await res.json();
+      toast.success("Event successfully added");
+      // const evt = await res.json();
       router.push(`/events/${evt.slug}`);
     }
   };

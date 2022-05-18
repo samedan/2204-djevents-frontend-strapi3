@@ -4,9 +4,11 @@ import Layout from "@/components/Layout";
 import DashboardEvent from "@/components/DashboardEvent";
 import { API_URL } from "@/config/index";
 import styles from "@/styles/Dashboard.module.css";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function DashboardPage({ events, token }) {
   const router = useRouter();
+  console.log(events);
 
   const deleteEvent = async (id) => {
     if (confirm("Are you sure?")) {
@@ -29,6 +31,7 @@ export default function DashboardPage({ events, token }) {
 
   return (
     <Layout title="User Dashboard">
+      <ToastContainer />
       <div className={styles.dash}>
         <h1>Dashboard</h1>
         <h3>My Events</h3>
@@ -43,28 +46,45 @@ export default function DashboardPage({ events, token }) {
 
 export async function getServerSideProps({ req }) {
   const { token } = parseCookies(req);
-
+  console.log("/events/me");
   const res = await fetch(`${API_URL}/events/me`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
+
+      "Content-Type": "application/json",
     },
   });
-
-  const events = await res.json();
-  console.log(events.error);
-  console.log(token);
-  if (events.error === "Forbidden") {
+  // console.log("events /events/me");
+  // console.log({ res });
+  // console.log("res.statusText");
+  // console.log(res.statusText);
+  if (res.statusText === "Not Found") {
+    console.log("user has no events OR /events/me doesnt work");
+    toast.success("user has no events OR /events/me doesnt work");
     return {
       props: {
         events: [],
         token,
       },
     };
-  } else {
+  }
+  // else {
+  //   if (events.error === "Forbidden") {
+  //     toast.error("user forbidden");
+  //     return {
+  //       props: {
+  //         events: [],
+  //         token,
+  //       },
+  //     };
+  // }
+  else {
+    toast.error("user HAS events");
+    const userEvents = await res.json();
     return {
       props: {
-        events,
+        events: userEvents,
         token,
       },
     };

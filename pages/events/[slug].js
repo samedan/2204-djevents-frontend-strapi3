@@ -30,7 +30,7 @@ export default function EventPage({ evt }) {
               />
             ) : (
               <Image
-                src={evt.image.formats.small.url}
+                src={evt.image.formats.thumbnail.url}
                 width={960}
                 height={600}
               />
