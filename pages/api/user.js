@@ -11,10 +11,10 @@ export default async (req, res) => {
     // }
 
     const { token } = cookie.parse(req.headers.cookie);
-    // console.log("token");
-    // console.log({ token });
-    // console.log("API_URL");
-    // console.log({ API_URL });
+    console.log("token");
+    console.log({ token });
+    console.log("API_URL");
+    console.log({ API_URL });
 
     const strapiRes = await fetch(`${API_URL}/users/me`, {
       method: "GET",
@@ -22,9 +22,9 @@ export default async (req, res) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    // console.log("strapiRes /api/user.js", strapiRes);
+    console.log("strapiRes /api/user.js", strapiRes);
     const user = await strapiRes.json();
-    // console.log("user on /api/user.js", user);
+    console.log("user on /api/user.js", user);
 
     if (strapiRes.ok) {
       res.status(200).json({ user });
