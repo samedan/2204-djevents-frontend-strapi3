@@ -6,9 +6,9 @@ import { API_URL, PER_PAGE } from "@/config/index";
 export default function EventsPage({ events, page, total }) {
   console.log(PER_PAGE);
   console.log({ total });
+
   return (
     <Layout>
-      <h1>FIX Getting Events</h1>
       <h1>Events</h1>
       {events.length === 0 && <h3>No events to show</h3>}
 

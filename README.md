@@ -1,13 +1,16 @@
+## GitHub
+
 Original Git :
 https://github.com/bradtraversy/dj-events-frontend
 
 Strapi Backend
 https://github.com/bradtraversy/dj-events-backend
 
-My Git:
-https://github.com/samedan/2204_dj-events-frontend
+My FrontEnd Git:
+https://github.com/samedan/2204-djevents-frontend-strapi3
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+My BackEnd Git:
+https://github.com/samedan/2205_djevents_backend_mongodb
 
 ## Events per Page '/events'
 
