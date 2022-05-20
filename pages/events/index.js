@@ -4,6 +4,8 @@ import Pagination from "@/components/Pagination";
 import { API_URL, PER_PAGE } from "@/config/index";
 
 export default function EventsPage({ events, page, total }) {
+  console.log(PER_PAGE);
+  console.log({ total });
   return (
     <Layout>
       <h1>FIX Getting Events</h1>
