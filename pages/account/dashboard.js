@@ -47,7 +47,7 @@ export default function DashboardPage({ events, token }) {
 export async function getServerSideProps({ req }) {
   const { token } = parseCookies(req);
   console.log("/events/me");
-  const res = await fetch(`${API_URL}/events/me`, {
+  const resUser = await fetch(`${API_URL}/users/me`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -55,11 +55,25 @@ export async function getServerSideProps({ req }) {
       "Content-Type": "application/json",
     },
   });
-  // console.log("events /events/me");
-  // console.log({ res });
-  // console.log("res.statusText");
-  // console.log(res.statusText);
-  if (res.statusText === "Not Found") {
+  const user = await resUser.json();
+  if (user) {
+    const res = await fetch(`${API_URL}/events/me`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+
+        "Content-Type": "application/json",
+      },
+    });
+    toast.error("user HAS events");
+    const userEvents = await res.json();
+    return {
+      props: {
+        events: userEvents,
+        token,
+      },
+    };
+  } else {
     console.log("user has no events OR /events/me doesnt work");
     toast.success("user has no events OR /events/me doesnt work");
     return {
@@ -69,6 +83,28 @@ export async function getServerSideProps({ req }) {
       },
     };
   }
+  // const res = await fetch(`${API_URL}/events/me`, {
+  //   method: "GET",
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  // console.log("events /events/me");
+  // console.log({ res });
+  // console.log("res.statusText");
+  // console.log(res.statusText);
+  // if (res.statusText === "Not Found" || res.statusCode === 401) {
+  //   console.log("user has no events OR /events/me doesnt work");
+  //   toast.success("user has no events OR /events/me doesnt work");
+  //   return {
+  //     props: {
+  //       events: [],
+  //       token,
+  //     },
+  //   };
+  // }
   // else {
   //   if (events.error === "Forbidden") {
   //     toast.error("user forbidden");
@@ -79,14 +115,4 @@ export async function getServerSideProps({ req }) {
   //       },
   //     };
   // }
-  else {
-    toast.error("user HAS events");
-    const userEvents = await res.json();
-    return {
-      props: {
-        events: userEvents,
-        token,
-      },
-    };
-  }
 }
